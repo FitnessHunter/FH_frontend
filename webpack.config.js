@@ -3,24 +3,24 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 module.exports = {
+  mode: "development",
   entry: path.resolve(__dirname, "src/index.tsx"),
   output: {
-    filename: "bundle.js",
+    filename: "[name].[fullhash].js",
     path: path.resolve(__dirname, "dist"),
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".scss", ".sass"],
+    extensions: [".tsx", ".ts", ".jsx", ".js"],
   },
   module: {
     rules: [
       {
         test: /\.(ts|js)x?$/i,
-        exclude: /node_modules/,
         use: "babel-loader",
+        exclude: /node_modules/,
       },
       {
         test: /\.s[ac]ss$/i,
-        exclude: /node_modules/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
@@ -37,7 +37,5 @@ module.exports = {
   ],
   devServer: {
     port: 3000,
-    open: true,
-    hot: true,
   },
 };
