@@ -1,0 +1,379 @@
+@use "/src/variables";
+
+@font-face {
+  font-family: "RobotoCondensed";
+  src: local("RobotoCondensed"),
+    url("/src/assets/RobotoCondensed-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "RobotoCondensed";
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: none;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  margin: variables.$header-height 0 0 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: variables.c(primary, main);
+}
+
+::selection {
+}
+
+.root-background {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+.root-background-white {
+  background-color: #ffffff;
+}
+
+.root-background-pattern {
+  background-image: url("/src/assets/pattern.png");
+  background-size: cover;
+  background-position: left;
+}
+
+.workspace {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: variables.$header-height 0 0 0;
+  overflow: auto;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  user-select: none;
+}
+
+.text {
+  user-select: none;
+}
+
+.text-s {
+  font-size: 14px;
+}
+
+.text-m {
+  font-size: 18px;
+}
+
+.text-l {
+  font-size: 24px;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-main {
+  color: variables.c(primary, main);
+}
+
+.text-light {
+  color: variables.c(text, light);
+}
+
+.text-dark {
+  color: variables.c(text, dark);
+}
+
+.text-active {
+  color: variables.c(text, active);
+}
+
+.glass {
+  &:before {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    content: "";
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+}
+
+.dark-background {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.icon-s {
+  width: 20px;
+}
+
+.icon-m {
+  width: 28px;
+}
+
+.icon-l {
+  width: 36px;
+}
+
+.icon-xl {
+  width: 44px;
+}
+
+.scale-animation {
+  transition: all 200ms;
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
+
+.rotate-animation {
+  transition: all 200ms;
+
+  &:hover {
+    cursor: pointer;
+    transform: rotate(-90deg);
+  }
+}
+
+.card {
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.card-glass {
+  &:before {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    content: "";
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+  }
+}
+
+.input-container {
+  width: 100%;
+  position: relative;
+  margin: 5px 0 0 0;
+}
+
+.input {
+  width: 100%;
+  height: 45px;
+  padding: 0 15px 0 15px;
+  border-radius: 20px;
+  border: 1px solid variables.c(text, light);
+  font-size: 18px;
+  color: variables.c(text, main);
+  outline: none;
+
+  &::placeholder {
+    visibility: hidden;
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid variables.c(text, dark);
+  }
+
+  &:disabled,
+  &:hover:disabled,
+  &:focus:disabled {
+    color: variables.c(text, dark);
+    border: 1px solid variables.c(text, light);
+    background-color: variables.c(disabled, main);
+  }
+
+  &:focus ~ .input-label,
+  &:not(:placeholder-shown) ~ .input-label {
+    font-size: 14px;
+    transform: translateX(8px) translateY(-22px);
+  }
+
+  &:disabled ~ .input-label,
+  &:disabled ~ .input-label-error {
+    color: variables.c(text, light);
+    background-color: variables.c(disabled, main);
+  }
+
+  &:disabled:not(:placeholder-shown) ~ .input-label,
+  &:disabled:not(:placeholder-shown) ~ .input-label-error {
+    background: linear-gradient(
+      0deg,
+      variables.c(disabled, main) 0%,
+      variables.c(disabled, main) 52%,
+      #ffffff00 52%,
+      #ffffff00 100%
+    );
+  }
+}
+
+.input-label {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  padding: 0 3px 0 3px;
+  background-color: #ffffff;
+  font-size: 16px;
+  color: variables.c(text, dark);
+  transition: transform 200ms, font-size 200ms;
+  pointer-events: none;
+}
+
+.input-label-error {
+  color: variables.c(error, main);
+}
+
+.input-error {
+  border: 1px solid variables.c(error, main);
+
+  &:hover,
+  &:focus {
+    padding: 0 14px 0 14px;
+    border: 2px solid variables.c(error, main);
+  }
+}
+
+.input-password {
+  padding-right: 45px;
+
+  &:hover,
+  &:focus {
+    padding-right: 45px;
+  }
+}
+
+.input-container__show-hide {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+}
+
+.input-container__input-error-message {
+  margin: 5px 16px 5px 16px;
+}
+
+.input-error-message {
+  font-size: 14px;
+  color: variables.c(error, main);
+  user-select: none;
+}
+
+.button {
+  width: max-content;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: all 100ms;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+.button-s {
+  height: 28px;
+  padding: 6px 18px 0 18px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.button-m {
+  height: 36px;
+  padding: 6px 24px 0 24px;
+  border-radius: 16px;
+  font-size: 18px;
+}
+
+.button-l {
+  height: 50px;
+  padding: 9px 30px 0 30px;
+  border-radius: 20px;
+  font-size: 24px;
+}
+
+.button-outlined {
+  border: 1px solid variables.c(primary, main);
+  color: variables.c(primary, main);
+
+  &:hover,
+  &:focus {
+    border: 1px solid variables.c(secondary, main);
+    color: variables.c(secondary, main);
+  }
+}
+
+.button-outlined-disabled {
+  border: 1px solid variables.c(text, light);
+  color: variables.c(text, light);
+  cursor: default;
+
+  &:hover,
+  &:focus {
+    border: 1px solid variables.c(text, light);
+    color: variables.c(text, light);
+  }
+
+  &:active {
+    transform: none;
+  }
+}
+
+.button-contained {
+  background-color: variables.c(primary, main);
+  color: #ffffff;
+
+  &:hover,
+  &:focus {
+    background-color: variables.c(secondary, main);
+  }
+}
+
+.button-contained-disabled {
+  background-color: variables.c(text, light);
+  cursor: default;
+
+  &:hover,
+  &:focus {
+    background-color: variables.c(text, light);
+  }
+
+  &:active {
+    transform: none;
+  }
+}
