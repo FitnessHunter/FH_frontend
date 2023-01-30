@@ -1,8 +1,9 @@
-import { Instance, onSnapshot, types } from "mobx-state-tree";
 import { createContext, useContext } from "react";
-
+import { Instance, onSnapshot, types } from "mobx-state-tree";
 import { AuthStore } from "./AuthStore";
 import { SettingsStore } from "./SettingsStore";
+import { getFromLocalStorage } from "../utils/methods";
+import { IToken } from "../types/AuthTypes";
 
 const RootStore = types.model({
   authStore: AuthStore,
@@ -10,7 +11,7 @@ const RootStore = types.model({
 });
 
 export const rootStore = RootStore.create({
-  authStore: {},
+  authStore: { token: getFromLocalStorage<IToken>("fh_token")?.token },
   settingsStore: { systemSettings: { windowSize: {} } },
 });
 
@@ -27,6 +28,6 @@ export const useStore = () => {
   return store;
 };
 
-onSnapshot(rootStore, (snapshot) => {
-  // console.log("Snapshot: ", snapshot);
-});
+// onSnapshot(rootStore, (snapshot) => {
+//   console.log("Snapshot: ", snapshot);
+// });

@@ -5,11 +5,11 @@
     "target": "es6",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": true,
     "jsx": "react",
     "strict": true,
     "noEmit": true,
     "removeComments": true,
+    "noImplicitAny": true,
     "noImplicitReturns": true
   },
   "include": ["src"],

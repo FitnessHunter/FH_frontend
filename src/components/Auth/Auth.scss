@@ -1,0 +1,34 @@
+.auth-card {
+  width: 300px;
+  position: relative;
+
+  &__title {
+    margin: 15px 0 50px 20px;
+  }
+
+  &__back {
+    z-index: -1;
+    width: 270px;
+    height: 40px;
+    position: absolute;
+    top: calc(100% - 28px);
+    left: 15px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  }
+
+  &__hint-link {
+    margin: -25px auto 15px auto;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px 30px 20px;
+
+  &__button {
+    margin: 15px 0 0 0;
+  }
+}

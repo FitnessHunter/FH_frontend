@@ -1,5 +1,4 @@
 import isEmail from "validator/lib/isEmail";
-
 import { IValidator } from "../types/OtherTypes";
 
 export const emailValidator: IValidator = {
@@ -14,6 +13,6 @@ export const passwordValidator: IValidator = {
 };
 
 export const notEmptyValidator: IValidator = {
-  validate: (value: string) => value.trim().length >= 1,
+  validate: (value: string) => !!value.trim(),
   message: "This field is required",
 };

@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-
 import { IAuthStore } from "../stores/AuthStore";
 import { ISigninForm, ISignupForm } from "../types/AuthTypes";
 import {
@@ -36,7 +35,7 @@ export const useSignupForm = (authStore: IAuthStore): ISignupForm => {
   const lastName = useValidatedInputField("", notEmptyValidator);
   const password = useValidatedInputField("", passwordValidator);
   const passwordConfirmation = useValidatedInputField("", passwordValidator);
-  const [image, setImage] = useState();
+  const [image, setImage] = useState<File | null>(null);
 
   useEffect(() => {
     if (password.isValid && passwordConfirmation.isValid) {
@@ -68,7 +67,15 @@ export const useSignupForm = (authStore: IAuthStore): ISignupForm => {
   const signup = () => {
     if (authStore.loading || !isFormValid) return;
 
-    // authStore.signup();
+    const userCreationFormData = new FormData();
+
+    userCreationFormData.append("email", email.value);
+    userCreationFormData.append("firstName", firstName.value);
+    userCreationFormData.append("lastName", lastName.value);
+    userCreationFormData.append("password", password.value);
+    image && userCreationFormData.append("image", image);
+
+    authStore.signup(userCreationFormData);
   };
 
   return {
@@ -77,9 +84,9 @@ export const useSignupForm = (authStore: IAuthStore): ISignupForm => {
     lastName,
     password,
     passwordConfirmation,
-    // image,
-    // setImage,
+    image,
     isFormValid,
+    setImage,
     signup,
   };
 };

@@ -1,13 +1,14 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { Link, useLocation } from "react-router-dom";
-
-import { useStore } from "../../stores/RootStore";
+import { useStore } from "../../../stores/RootStore";
 import {
   ROUTES_WITH_AUTH,
   ROUTES_WITH_NO_AUTH,
   ROUTE_NAMES,
-} from "../../utils/constants";
+} from "../../../utils/constants";
+
+import "./NavigationList.scss";
 
 const NavigationList = observer(() => {
   const { authStore } = useStore();
@@ -20,18 +21,27 @@ const NavigationList = observer(() => {
           return location.pathname === route ? (
             <div
               key={route}
-              className="navbar__navbar-item navbar-item navbar-item-current text text-active"
+              className="navigation__navigation-item navigation-item navigation-item_current text text_active"
             >
               {ROUTE_NAMES[route as keyof typeof ROUTE_NAMES]}
             </div>
           ) : (
             <Link key={route} to={route}>
-              <div className="navbar__navbar-item navbar-item text-main">
+              <div className="navigation__navigation-item navigation-item text_main">
                 {ROUTE_NAMES[route as keyof typeof ROUTE_NAMES]}
               </div>
             </Link>
           );
         }
+      )}
+
+      {authStore.isLoggedIn && (
+        <div
+          className="navigation__navigation-item navigation-item text text_main pointer"
+          onClick={authStore.signout}
+        >
+          Sign Out
+        </div>
       )}
     </>
   );

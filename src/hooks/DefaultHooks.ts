@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-
+import { useCallback, useEffect, useState } from "react";
 import { ISize, ISystemSettings } from "../stores/SettingsStore";
 import { IValidatedInputField, IValidator } from "../types/OtherTypes";
 
@@ -14,15 +13,10 @@ export const useWindowResize = (systemSettings: ISystemSettings) => {
 
     if (systemSettings.windowType === "mobile") {
       if (size.width! >= 800) systemSettings.setWindowType("desktop");
-      return;
-    }
-    if (systemSettings.windowType === "desktop") {
+    } else if (systemSettings.windowType === "desktop") {
       if (size.width! < 800) systemSettings.setWindowType("mobile");
-      return;
-    }
-    if (!systemSettings.windowType && size.width) {
+    } else if (!systemSettings.windowType && size.width) {
       systemSettings.setWindowType(size.width >= 800 ? "desktop" : "mobile");
-      return;
     }
   };
 
@@ -66,13 +60,13 @@ export const useValidatedInputField = <T>(
     validator.validate(initial) ? null : validator.message
   );
 
-  const change = (newValue: T) => {
+  const change = useCallback((newValue: T) => {
     const isNewValueValid = validator.validate(newValue);
 
     setValue(newValue);
     setValid(isNewValueValid);
     setMessage(isNewValueValid ? null : validator.message);
-  };
+  }, []);
 
   return {
     value,

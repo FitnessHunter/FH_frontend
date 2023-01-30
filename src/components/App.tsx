@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 import { Route, Routes, useLocation } from "react-router-dom";
-
 import { useStore } from "../stores/RootStore";
 import { useWindowResize } from "../hooks/DefaultHooks";
-import Header from "./header/Header";
+import Header from "./Header/Header";
 import Home from "../screens/Home";
 import Auth from "../screens/Auth";
 import Account from "../screens/Account";
@@ -12,8 +12,9 @@ import About from "../screens/About";
 import NotFound from "../screens/NotFound";
 import AuthRequired from "../screens/AuthRequired";
 import { ROUTES_WITH_BACKGROUND_PATTERN } from "../utils/constants";
+import client from "../services/AxiosInstance";
 
-import "../index.scss";
+import "/src/styles/index.scss";
 
 const App = observer(() => {
   const { authStore, settingsStore } = useStore();
@@ -21,13 +22,22 @@ const App = observer(() => {
 
   useWindowResize(settingsStore.systemSettings);
 
+  useEffect(() => {
+    if (authStore.token)
+      client.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${authStore.token}`;
+    else delete client.defaults.headers.common["Authorization"];
+  }, [authStore.token]);
+
   return (
     <div
-      className={`root-background ${
-        ROUTES_WITH_BACKGROUND_PATTERN.includes(location.pathname)
-          ? "root-background-pattern"
-          : "root-background-white"
-      }`}
+      className={classNames({
+        "root-background": true,
+        "root-background_pattern": ROUTES_WITH_BACKGROUND_PATTERN.includes(
+          location.pathname
+        ),
+      })}
     >
       <Header />
 

@@ -1,5 +1,4 @@
 import { Instance, types } from "mobx-state-tree";
-
 import { WindowType } from "../types/OtherTypes";
 
 export const Size = types.model("Size", {
@@ -14,14 +13,13 @@ export const SystemSettings = types
       types.union(types.literal("desktop"), types.literal("mobile"))
     ),
   })
-  .actions((self) => ({
-    setWindowSize(size: ISize) {
-      self.windowSize = size;
-    },
-    setWindowType(type: WindowType) {
-      self.windowType = type;
-    },
-  }));
+  .actions((self) => {
+    const setWindowSize = (size: ISize) => (self.windowSize = size);
+
+    const setWindowType = (type: WindowType) => (self.windowType = type);
+
+    return { setWindowSize, setWindowType };
+  });
 
 export const SettingsStore = types.model("SettingsStore", {
   systemSettings: SystemSettings,

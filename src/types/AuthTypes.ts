@@ -9,15 +9,6 @@ export interface IUserCredentials {
   password: string;
 }
 
-export interface IUserCreationDTO {
-  email: string;
-  phone?: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  image?: string;
-}
-
 export interface IUserUpdatingDTO {
   email?: string;
   phone?: string;
@@ -40,8 +31,8 @@ export interface ISignupForm {
   lastName: IValidatedInputField<string>;
   password: IValidatedInputField<string>;
   passwordConfirmation: IValidatedInputField<string>;
+  image: File | null;
   isFormValid: boolean;
+  setImage: (image: File | null) => void;
   signup: () => void;
-  // image:
-  // setImage: () => void;
 }
