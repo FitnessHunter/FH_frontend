@@ -77,7 +77,7 @@ const Input = memo(
         {type === "password" && (
           <div
             className={classNames({
-              "input-container__show-hide icon_m scale-animation": true,
+              "input-container__show-hide icon_m scale-animation-1": true,
               icon_disabled: disabled,
             })}
             onClick={() =>

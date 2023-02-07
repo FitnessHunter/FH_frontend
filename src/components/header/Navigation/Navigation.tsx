@@ -36,7 +36,7 @@ const Navigation = observer(() => {
         <>
           {!isMenuOpen && (
             <div
-              className="navigation__menu-icon icon_l scale-animation"
+              className="navigation__menu-icon icon_l scale-animation-1"
               onClick={() => setMenuOpen(true)}
             >
               <img

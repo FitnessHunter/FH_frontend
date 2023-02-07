@@ -30,7 +30,7 @@ const NavigationSidebar = observer(({ isMenuOpen, setMenuOpen }: Props) => {
         className="navigation__navigation-sidebar navigation-sidebar glass"
       >
         <div
-          className="navigation-sidebar__close-icon icon_l scale-animation"
+          className="navigation-sidebar__close-icon icon_l scale-animation-1"
           onClick={() => setMenuOpen(false)}
         >
           <img

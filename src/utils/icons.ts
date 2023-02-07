@@ -5,6 +5,7 @@ import HideIcon from "/src/assets/icons/hide-icon.svg";
 import MenuIcon from "/src/assets/icons/menu-icon.svg";
 import PhotoIcon from "/src/assets/icons/photo-icon.svg";
 import ShowIcon from "/src/assets/icons/show-icon.svg";
+import WhiteCloseIcon from "/src/assets/icons/close-icon_white.svg";
 
 export const icons = {
   AddAccountIcon,
@@ -14,4 +15,5 @@ export const icons = {
   MenuIcon,
   PhotoIcon,
   ShowIcon,
+  WhiteCloseIcon,
 };

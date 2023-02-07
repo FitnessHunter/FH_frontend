@@ -26,7 +26,7 @@ const AuthSwitch = ({ variant, image, toggleVariant, setImage }: Props) => {
   };
 
   return variant === "signin" ? (
-    <div className="auth-switch scale-animation" onClick={toggleVariant}>
+    <div className="auth-switch scale-animation-1" onClick={toggleVariant}>
       <div className="icon_xl">
         <img
           src={icons.AddAccountIcon}
@@ -43,7 +43,7 @@ const AuthSwitch = ({ variant, image, toggleVariant, setImage }: Props) => {
           "auth-switch": true,
           "auth-switch_no-preview": !image,
           "auth-switch_with-preview": image,
-          "scale-animation": !image,
+          "scale-animation-1": !image,
         })}
         onClick={() => inputRef.current?.click()}
       >
@@ -76,7 +76,7 @@ const AuthSwitch = ({ variant, image, toggleVariant, setImage }: Props) => {
 
       {image && (
         <div
-          className="auth-switch-clear-preview icon_s scale-animation"
+          className="auth-switch-clear-preview icon_s scale-animation-1"
           onClick={removeImage}
         >
           <img
