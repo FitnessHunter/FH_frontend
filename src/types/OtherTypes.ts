@@ -12,3 +12,15 @@ export interface IValidator {
   validate: (value: any) => boolean;
   message: string;
 }
+
+export interface Position {
+  x?: number;
+  y?: number;
+}
+
+export enum Direction {
+  Up = "up",
+  Down = "down",
+  Left = "left",
+  Right = "right",
+}

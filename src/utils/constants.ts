@@ -14,3 +14,5 @@ export const ROUTE_NAMES = {
   "/about": "About us",
   "/account": "Account",
 };
+
+export const DEFAULT_NOTIFICATION_TIMEOUT = 3000;

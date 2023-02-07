@@ -1,0 +1,64 @@
+@use "/src/styles/variables";
+
+.notification-container {
+  z-index: 500;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &__notification {
+    margin: 10px 10px 10px 10px;
+  }
+}
+
+.notification {
+  width: 270px;
+  padding: 20px 25px 20px 25px;
+  border-radius: 10px;
+  color: #ffffff;
+
+  &_default {
+    background: linear-gradient(
+      45deg,
+      variables.c(info, light) 0%,
+      variables.c(info, main) 50%,
+      variables.c(info, main) 100%
+    );
+  }
+
+  &_error {
+    background: linear-gradient(
+      45deg,
+      variables.c(error, light) 0%,
+      variables.c(error, main) 80%,
+      variables.c(error, dark) 100%
+    );
+  }
+
+  &_success {
+    background: linear-gradient(
+      45deg,
+      variables.c(success, main) 0%,
+      variables.c(success, main) 30%,
+      variables.c(success, light) 100%
+    );
+  }
+
+  &_warning {
+    background-color: variables.c(warning, light);
+  }
+}
+
+.notification-enter {
+  transform: translateX(300px);
+}
+
+.notification-active {
+  transform: translateX(0px);
+  transition: transform 300ms;
+}
+
+.notification-exit {
+  transform: translateX(300px);
+  transition: transform 300ms;
+}

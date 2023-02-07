@@ -4,15 +4,18 @@ import { AuthStore } from "./AuthStore";
 import { SettingsStore } from "./SettingsStore";
 import { getFromLocalStorage } from "../utils/methods";
 import { IToken } from "../types/AuthTypes";
+import { NotificationStore } from "./NotificationStore";
 
 const RootStore = types.model({
-  authStore: AuthStore,
   settingsStore: SettingsStore,
+  authStore: AuthStore,
+  notificationStore: NotificationStore,
 });
 
 export const rootStore = RootStore.create({
-  authStore: { token: getFromLocalStorage<IToken>("fh_token")?.token },
   settingsStore: { systemSettings: { windowSize: {} } },
+  authStore: { token: getFromLocalStorage<IToken>("fh_token")?.token },
+  notificationStore: {},
 });
 
 export type RootInstance = Instance<typeof RootStore>;

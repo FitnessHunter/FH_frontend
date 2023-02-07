@@ -1,6 +1,7 @@
 import { flow, Instance, types } from "mobx-state-tree";
 import { IToken, IUserCredentials } from "../types/AuthTypes";
 import { AuthService } from "../services/api/AuthService";
+import { pushNotification } from "./NotificationStore";
 
 export const User = types.model("User", {
   email: types.string,
@@ -32,8 +33,7 @@ export const AuthStore = types
 
         localStorage.setItem("fh_token", JSON.stringify(token));
       } catch (error) {
-        console.error("Failed to sign in", error);
-        // popup
+        pushNotification(self, "error", "Failed to sign in");
       }
 
       self.loading = false;
@@ -49,8 +49,7 @@ export const AuthStore = types
 
         localStorage.setItem("fh_token", JSON.stringify(token));
       } catch (error) {
-        console.error("Failed to sign up", error);
-        // popup
+        pushNotification(self, "error", "Failed to sign up");
       }
 
       self.loading = false;
@@ -71,8 +70,7 @@ export const AuthStore = types
 
         self.user = user;
       } catch (error) {
-        console.error("Failed to get user info", error);
-        // popup
+        pushNotification(self, "error", "Failed to get user data");
       }
 
       self.loading = false;
