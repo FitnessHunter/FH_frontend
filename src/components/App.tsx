@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import classNames from "classnames";
 import { observer } from "mobx-react-lite";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -12,7 +12,8 @@ import About from "../screens/About";
 import NotFound from "../screens/NotFound";
 import AuthRequired from "../screens/AuthRequired";
 import { ROUTES_WITH_BACKGROUND_PATTERN } from "../utils/constants";
-import client from "../services/AxiosInstance";
+import { useAxios } from "../services/AxiosInstance";
+import NotificationContainer from "./Notifications/NotificationContainer";
 
 import "/src/styles/index.scss";
 
@@ -21,14 +22,7 @@ const App = observer(() => {
   const location = useLocation();
 
   useWindowResize(settingsStore.systemSettings);
-
-  useEffect(() => {
-    if (authStore.token)
-      client.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${authStore.token}`;
-    else delete client.defaults.headers.common["Authorization"];
-  }, [authStore.token]);
+  useAxios(authStore.token, authStore.signout);
 
   return (
     <div
@@ -54,6 +48,8 @@ const App = observer(() => {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
+
+      <NotificationContainer />
     </div>
   );
 });
