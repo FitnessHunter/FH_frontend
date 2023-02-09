@@ -1,0 +1,19 @@
+@use "/src/styles/variables";
+
+.header {
+  z-index: 100;
+  width: 100%;
+  height: variables.$header-height;
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__text {
+    margin: 0 20px 0 20px;
+  }
+
+  &__navigation {
+    margin: 0 12px 0 12px;
+  }
+}

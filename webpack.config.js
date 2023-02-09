@@ -8,6 +8,7 @@ module.exports = {
   output: {
     filename: "[name].[fullhash].js",
     path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
@@ -24,8 +25,12 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        use: "file-loader",
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: "asset/resource",
       },
     ],
   },
@@ -37,5 +42,7 @@ module.exports = {
   ],
   devServer: {
     port: 3000,
+    open: true,
+    historyApiFallback: true,
   },
 };
