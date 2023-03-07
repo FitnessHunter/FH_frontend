@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 import "./Button.scss";
 
-interface Props {
+interface ButtonProps {
   text: string;
   variant?: "outlined" | "contained";
   size?: "s" | "m" | "l";
@@ -20,7 +20,7 @@ const Button = memo(
     className,
     disabled,
     onClick,
-  }: Props) => {
+  }: ButtonProps) => {
     return (
       <div
         tabIndex={0}

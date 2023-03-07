@@ -1,37 +1,35 @@
-import React, { useRef } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 import { CSSTransition } from "react-transition-group";
+import { useStore } from "../../../stores/RootStore";
 import NavigationList from "../NavigationList/NavigationList";
 import { useClickAwayListener } from "../../../hooks/DefaultHooks";
 import { icons } from "../../../utils/icons";
 
 import "./NavigationSidebar.scss";
 
-interface Props {
-  isMenuOpen: boolean;
-  setMenuOpen: (isMenuOpen: boolean) => void;
-}
+const NavigationSidebar = observer(() => {
+  const { navigationStore } = useStore();
 
-const NavigationSidebar = observer(({ isMenuOpen, setMenuOpen }: Props) => {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useClickAwayListener(ref, () => setMenuOpen(false));
+  useClickAwayListener(navigationStore.sidebarRef, () =>
+    navigationStore.setSidebarOpen(false)
+  );
 
   return (
     <CSSTransition
-      in={isMenuOpen}
-      nodeRef={ref}
+      in={navigationStore.isSidebarOpen}
+      nodeRef={navigationStore.sidebarRef}
       classNames="navigation-sidebar-animation"
       timeout={300}
       unmountOnExit
     >
       <div
-        ref={ref}
+        ref={navigationStore.sidebarRef}
         className="navigation__navigation-sidebar navigation-sidebar glass"
       >
         <div
           className="navigation-sidebar__close-icon icon_l scale-animation-1"
-          onClick={() => setMenuOpen(false)}
+          onClick={() => navigationStore.setSidebarOpen(false)}
         >
           <img
             src={icons.CloseIcon}

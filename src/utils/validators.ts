@@ -1,18 +1,43 @@
 import isEmail from "validator/lib/isEmail";
-import { IValidator } from "../types/OtherTypes";
 
-export const emailValidator: IValidator = {
-  validate: (email: string) => isEmail(email),
-  message: "Enter correct email address",
+export interface IValidator {
+  errorMessage: string;
+  validate: (value: any) => boolean;
+}
+
+export interface IValidators {
+  email: IValidator;
+  password: IValidator;
+  notEmpty: IValidator;
+  default: IValidator;
+}
+
+export const validators: IValidators = {
+  email: {
+    errorMessage: "Enter correct email address",
+    validate: (email: string) => isEmail(email),
+  },
+  password: {
+    errorMessage: "Minimum 8 characters, at least 1 letter and 1 number",
+    validate: (password: string) =>
+      /^(?=.*[a-z])(?=.*\d)[a-z\d]{8,}$/i.test(password),
+  },
+  notEmpty: {
+    errorMessage: "This field is required",
+    validate: (value: string) => !!value.trim(),
+  },
+  default: {
+    errorMessage: "Validator not found",
+    validate: () => false,
+  },
 };
 
-export const passwordValidator: IValidator = {
-  validate: (password: string) =>
-    /^(?=.*[a-z])(?=.*\d)[a-z\d]{8,}$/i.test(password),
-  message: "Minimum 8 characters, at least 1 letter and 1 number",
-};
+export const getValidator = (validatorType: string | undefined): IValidator => {
+  const validator = validators[validatorType as keyof IValidators];
 
-export const notEmptyValidator: IValidator = {
-  validate: (value: string) => !!value.trim(),
-  message: "This field is required",
+  if (!validator) {
+    return validators.default;
+  }
+
+  return validator;
 };

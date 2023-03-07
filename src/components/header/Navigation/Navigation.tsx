@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import { useLocation } from "react-router-dom";
 import { useStore } from "../../../stores/RootStore";
 import NavigationSidebar from "../NavigationSidebar/NavigationSidebar";
 import NavigationList from "../NavigationList/NavigationList";
@@ -9,22 +8,13 @@ import { icons } from "../../../utils/icons";
 import "./Navigation.scss";
 
 const Navigation = observer(() => {
-  const { settingsStore } = useStore();
-  const location = useLocation();
-
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const { settingsStore, navigationStore } = useStore();
 
   useEffect(() => {
-    if (isMenuOpen && settingsStore.systemSettings.windowType === "desktop") {
-      setMenuOpen(false);
+    if (settingsStore.systemSettings.windowType === "desktop") {
+      navigationStore.setSidebarOpen(false);
     }
   }, [settingsStore.systemSettings.windowType]);
-
-  useEffect(() => {
-    if (isMenuOpen) {
-      setMenuOpen(false);
-    }
-  }, [location.pathname]);
 
   return (
     <div className="header__navigation navigation">
@@ -34,10 +24,10 @@ const Navigation = observer(() => {
 
       {settingsStore.systemSettings.windowType === "mobile" && (
         <>
-          {!isMenuOpen && (
+          {!navigationStore.isSidebarOpen && (
             <div
               className="navigation__menu-icon icon_l scale-animation-1"
-              onClick={() => setMenuOpen(true)}
+              onClick={() => navigationStore.setSidebarOpen(true)}
             >
               <img
                 src={icons.MenuIcon}
@@ -48,10 +38,7 @@ const Navigation = observer(() => {
             </div>
           )}
 
-          <NavigationSidebar
-            isMenuOpen={isMenuOpen}
-            setMenuOpen={setMenuOpen}
-          />
+          <NavigationSidebar />
         </>
       )}
     </div>

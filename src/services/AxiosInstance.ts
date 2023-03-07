@@ -26,12 +26,10 @@ const onResponseError = (
   return Promise.reject(error);
 };
 
-export const useAxios = (token: string | undefined, signout: () => void) => {
+export const useAxios = (token: string | undefined, behaviorMap: any) => {
   useEffect(() => {
     client.interceptors.response.use(onResponse, (error: AxiosError) =>
-      onResponseError(error, {
-        401: signout,
-      })
+      onResponseError(error, behaviorMap)
     );
   }, []);
 

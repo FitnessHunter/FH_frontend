@@ -13,5 +13,4 @@ export const AuthService = {
       .then((response) => response.data),
   getUser: (): Promise<IUser> =>
     client.get("api/user").then((response) => response.data),
-  // updateUser:,
 };

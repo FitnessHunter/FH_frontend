@@ -7,6 +7,22 @@
   font-weight: normal;
 }
 
+.notification-container {
+  z-index: 150;
+}
+.header {
+  z-index: 140;
+}
+.auth-switch-clear-preview {
+  z-index: 122;
+}
+.auth-switch {
+  z-index: 121;
+}
+.background {
+  z-index: 120;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -42,6 +58,32 @@ a {
     background-image: url("/src/assets/pattern.png");
     background-size: cover;
     background-position: left;
+  }
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: inherit;
+
+  &_full-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+  }
+
+  &_blur {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(3px);
+  }
+
+  &_dark {
+    background: rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -116,9 +158,15 @@ a {
 
 .card {
   border-radius: 20px;
-  background-color: #ffffff;
+  background: #ffffff;
+
+  &_shadow {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+  }
 
   &_glass {
+    background: none;
+
     &:before {
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.3);
@@ -133,15 +181,16 @@ a {
       display: block;
     }
   }
-}
 
-.dark-background {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
+  &_back {
+    z-index: -1;
+    width: 90%;
+    height: 40px;
+    position: absolute;
+    bottom: -12px;
+    left: 5%;
+    border-radius: 20px;
+  }
 }
 
 .icon {
@@ -164,6 +213,10 @@ a {
   &_disabled {
     pointer-events: none;
   }
+}
+
+.disabled {
+  pointer-events: none;
 }
 
 .scale-animation-1 {

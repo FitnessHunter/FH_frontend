@@ -1,6 +1,6 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useStore } from "../../../stores/RootStore";
 import {
   ROUTES_WITH_AUTH,
@@ -11,14 +11,13 @@ import {
 import "./NavigationList.scss";
 
 const NavigationList = observer(() => {
-  const { authStore } = useStore();
-  const location = useLocation();
+  const { authStore, navigationStore } = useStore();
 
   return (
     <>
       {(authStore.isLoggedIn ? ROUTES_WITH_AUTH : ROUTES_WITH_NO_AUTH).map(
         (route) => {
-          return location.pathname === route ? (
+          return navigationStore.pathname === route ? (
             <div
               key={route}
               className="navigation__navigation-item navigation-item navigation-item_current text text_active"

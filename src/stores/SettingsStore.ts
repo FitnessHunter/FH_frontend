@@ -1,29 +1,16 @@
-import { Instance, types } from "mobx-state-tree";
-import { WindowType } from "../types/OtherTypes";
-
-export const Size = types.model("Size", {
-  width: types.maybe(types.number),
-  height: types.maybe(types.number),
-});
-
-export const SystemSettings = types
-  .model("SystemSettings", {
-    windowSize: Size,
-    windowType: types.maybe(
-      types.union(types.literal("desktop"), types.literal("mobile"))
-    ),
-  })
-  .actions((self) => {
-    const setWindowSize = (size: ISize) => (self.windowSize = size);
-
-    const setWindowType = (type: WindowType) => (self.windowType = type);
-
-    return { setWindowSize, setWindowType };
-  });
+import { SnapshotIn, types } from "mobx-state-tree";
+import {
+  SystemSettingsStore,
+  SystemSettingsStoreInitialState,
+} from "./SystemSettingsStore";
 
 export const SettingsStore = types.model("SettingsStore", {
-  systemSettings: SystemSettings,
+  systemSettings: SystemSettingsStore,
 });
 
-export interface ISize extends Instance<typeof Size> {}
-export interface ISystemSettings extends Instance<typeof SystemSettings> {}
+export const SettingsStoreInitialState: ISettingsStoreInitialState = {
+  systemSettings: SystemSettingsStoreInitialState,
+};
+
+export interface ISettingsStoreInitialState
+  extends SnapshotIn<typeof SettingsStore> {}

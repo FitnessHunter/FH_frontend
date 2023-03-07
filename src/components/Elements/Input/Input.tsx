@@ -1,64 +1,40 @@
-import React, { memo, useMemo, useState } from "react";
+import React from "react";
+import { observer } from "mobx-react-lite";
 import classNames from "classnames";
+import { IInputStore } from "../../../stores/InputStore";
 import { icons } from "../../../utils/icons";
 
 import "./Input.scss";
 
-interface Props {
-  type: React.HTMLInputTypeAttribute;
-  placeholder: string;
-  value: string;
-  errorMessage?: string | null;
-  allowEmpty?: boolean;
+interface InputProps {
+  field: IInputStore;
   className?: string;
   disabled?: boolean;
-  isValid?: boolean;
-  setValue: (value: string) => void;
   onEnterPress?: () => void;
+  setValue?: (value: string) => void;
 }
 
-const Input = memo(
-  ({
-    type,
-    placeholder,
-    value,
-    errorMessage,
-    allowEmpty,
-    className,
-    disabled,
-    isValid,
-    setValue,
-    onEnterPress,
-  }: Props) => {
-    const [inputType, setInputType] = useState<React.HTMLInputTypeAttribute>(
-      type || "text"
-    );
-
-    const showError = useMemo(
-      () =>
-        (isValid !== undefined &&
-          !(isValid || (allowEmpty && !value.trim()))) ||
-        (isValid && !!errorMessage),
-      [isValid, allowEmpty, value, errorMessage]
-    );
-
+const Input = observer(
+  ({ field, className, disabled, onEnterPress, setValue }: InputProps) => {
     return (
       <div className="input-container">
         <input
-          type={inputType}
-          placeholder={placeholder}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          type={field.currentInputType}
+          placeholder={field.placeholder}
+          value={field.value}
+          onChange={(e) =>
+            setValue ? setValue(e.target.value) : field.setValue(e.target.value)
+          }
           onKeyDown={(e) =>
-            !disabled && onEnterPress && isValid && e.key === "Enter"
+            !disabled && onEnterPress && field.isValid && e.key === "Enter"
               ? onEnterPress()
               : {}
           }
           className={classNames(
             {
               input: true,
-              input_error: showError,
-              input_password: type === "password",
+              input_error: field.showError,
+              input_password: field.initialInputType === "password",
             },
             className
           )}
@@ -68,13 +44,13 @@ const Input = memo(
         <span
           className={classNames({
             "input-label": true,
-            "input-label_error": showError,
+            "input-label_error": field.showError,
           })}
         >
-          {placeholder}
+          {field.placeholder}
         </span>
 
-        {type === "password" && (
+        {field.initialInputType === "password" && (
           <div
             className={classNames({
               "input-container__show-hide icon_m scale-animation-1": true,
@@ -83,11 +59,17 @@ const Input = memo(
             onClick={() =>
               disabled
                 ? {}
-                : setInputType(inputType === "text" ? "password" : "text")
+                : field.setCurrentInputType(
+                    field.currentInputType === "text" ? "password" : "text"
+                  )
             }
           >
             <img
-              src={inputType === "text" ? icons.HideIcon : icons.ShowIcon}
+              src={
+                field.currentInputType === "text"
+                  ? icons.HideIcon
+                  : icons.ShowIcon
+              }
               alt="Show/Hide"
               className="image"
               draggable="false"
@@ -96,7 +78,7 @@ const Input = memo(
         )}
 
         <div className="input-container__input-error-message input-error-message text">
-          {errorMessage && showError ? errorMessage : ""}
+          {field.showError ? field.errorMessage : ""}
         </div>
       </div>
     );

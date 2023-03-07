@@ -1,7 +1,6 @@
 @use "/src/styles/variables";
 
 .notification-container {
-  z-index: 500;
   position: absolute;
   top: 0;
   right: 0;
@@ -16,6 +15,7 @@
   padding: 20px 25px 20px 25px;
   border-radius: 10px;
   color: #ffffff;
+  transition: transform 300ms;
 
   &_default {
     background: linear-gradient(
@@ -49,16 +49,20 @@
   }
 }
 
-.notification-enter {
+.notification-animation-enter {
   transform: translateX(300px);
 }
 
-.notification-active {
+.notification-animation-enter-active {
   transform: translateX(0px);
   transition: transform 300ms;
 }
 
-.notification-exit {
+.notification-animation-exit {
+  transform: translateX(0px);
+}
+
+.notification-animation-exit-active {
   transform: translateX(300px);
   transition: transform 300ms;
 }

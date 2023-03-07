@@ -1,21 +1,28 @@
-import { createContext, useContext } from "react";
 import { Instance, onSnapshot, types } from "mobx-state-tree";
-import { AuthStore } from "./AuthStore";
-import { SettingsStore } from "./SettingsStore";
-import { getFromLocalStorage } from "../utils/methods";
-import { IToken } from "../types/AuthTypes";
-import { NotificationStore } from "./NotificationStore";
+import { createContext, useContext } from "react";
+import { SettingsStore, SettingsStoreInitialState } from "./SettingsStore";
+import {
+  NotificationStore,
+  NotificationStoreInitialState,
+} from "./NotificationStore";
+import {
+  NavigationStore,
+  NavigationStoreInitialState,
+} from "./NavigationStore";
+import { AuthStore, AuthStoreInitialState } from "./AuthStore";
 
-const RootStore = types.model({
+const RootStore = types.model("RootStore", {
   settingsStore: SettingsStore,
-  authStore: AuthStore,
   notificationStore: NotificationStore,
+  navigationStore: NavigationStore,
+  authStore: AuthStore,
 });
 
 export const rootStore = RootStore.create({
-  settingsStore: { systemSettings: { windowSize: {} } },
-  authStore: { token: getFromLocalStorage<IToken>("fh_token")?.token },
-  notificationStore: {},
+  settingsStore: SettingsStoreInitialState,
+  notificationStore: NotificationStoreInitialState,
+  navigationStore: NavigationStoreInitialState,
+  authStore: AuthStoreInitialState,
 });
 
 export type RootInstance = Instance<typeof RootStore>;
