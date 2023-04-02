@@ -4,12 +4,12 @@ import { observer } from "mobx-react-lite";
 import classNames from "classnames";
 import { useStore } from "../stores/RootStore";
 import Header from "./Header/Header";
-import Home from "../pages/Home";
-import Auth from "../pages/Auth";
-import Account from "../pages/Account";
-import About from "../pages/About";
-import NotFound from "../pages/NotFound";
-import { AuthRequired, NoAuthRequired } from "../pages/RouterPermissions";
+import HomeScreen from "../screens/HomeScreen";
+import AuthScreen from "../screens/AuthScreen";
+import AccountScreen from "../screens/AccountScreen";
+import AboutScreen from "../screens/AboutScreen";
+import NotFoundScreen from "../screens/NotFoundScreen";
+import { AuthRequired, NoAuthRequired } from "../screens/RouterPermissions";
 import { useAxios } from "../services/AxiosInstance";
 import NotificationContainer from "./Notifications/NotificationContainer";
 
@@ -38,18 +38,18 @@ const App = observer(() => {
 
       <div className="workspace">
         <Routes>
-          <Route path="/about" element={<About />} />
+          <Route path="/about" element={<AboutScreen />} />
 
           <Route element={<NoAuthRequired to="/" />}>
-            <Route path="/auth" element={<Auth />} />
+            <Route path="/auth" element={<AuthScreen />} />
           </Route>
 
           <Route element={<AuthRequired to="/auth" />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/account" element={<Account />} />
+            <Route path="/" element={<HomeScreen />} />
+            <Route path="/account" element={<AccountScreen />} />
           </Route>
 
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </div>
 

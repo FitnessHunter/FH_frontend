@@ -22,7 +22,7 @@
   padding: 0 15px 0 15px;
   border-radius: 20px;
   border: 1px solid variables.c(text, light);
-  font-size: 18px;
+  font-size: 1.1rem; //18px;
   color: variables.c(text, main);
   outline: none;
 
@@ -46,7 +46,7 @@
 
   &:focus ~ .input-label,
   &:not(:placeholder-shown) ~ .input-label {
-    font-size: 14px;
+    font-size: 0.9rem; //14px;
     transform: translateX(8px) translateY(-22px);
   }
 
@@ -93,7 +93,7 @@
   left: 16px;
   padding: 0 3px 0 3px;
   background-color: #ffffff;
-  font-size: 16px;
+  font-size: 1rem; //16px;
   color: variables.c(text, dark);
   transition: transform 200ms, font-size 200ms;
   pointer-events: none;
@@ -104,6 +104,6 @@
 }
 
 .input-error-message {
-  font-size: 14px;
+  font-size: 0.9rem; //14px;
   color: variables.c(error, main);
 }

@@ -1,24 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { observer } from "mobx-react-lite";
 import classNames from "classnames";
-import { useStore } from "../stores/RootStore";
-import AuthVariantSwitch from "../components/Auth/AuthVariantSwitch/AuthVariantSwitch";
-import SigninForm from "../components/Auth/SigninForm/SigninForm";
-import SignupForm from "../components/Auth/SignupForm/SignupForm";
-import Loader from "../components/Elements/Loader/Loader";
+import { useStore } from "../../stores/RootStore";
+import Loader from "../Elements/Loader/Loader";
+import AuthVariantSwitch from "./AuthVariantSwitch/AuthVariantSwitch";
+import SigninForm from "./SigninForm/SigninForm";
+import SignupForm from "./SignupForm/SignupForm";
 
-import "../components/Auth/Auth.scss";
+import "./AuthCard.scss";
 
-const Auth = observer(() => {
+const AuthCard = observer(() => {
   const { authStore } = useStore();
-
-  useEffect(() => {
-    authStore.onCreate();
-
-    return () => {
-      authStore.onDestroy();
-    };
-  }, []);
 
   return (
     <div className="auth-card card">
@@ -55,4 +47,4 @@ const Auth = observer(() => {
   );
 });
 
-export default Auth;
+export default AuthCard;

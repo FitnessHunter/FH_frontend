@@ -1,9 +1,9 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import { CSSTransition } from "react-transition-group";
+import { useOnClickOutside } from "usehooks-ts";
 import { useStore } from "../../../stores/RootStore";
 import NavigationList from "../NavigationList/NavigationList";
-import { useClickAwayListener } from "../../../hooks/DefaultHooks";
 import { icons } from "../../../utils/icons";
 
 import "./NavigationSidebar.scss";
@@ -11,7 +11,7 @@ import "./NavigationSidebar.scss";
 const NavigationSidebar = observer(() => {
   const { navigationStore } = useStore();
 
-  useClickAwayListener(navigationStore.sidebarRef, () =>
+  useOnClickOutside(navigationStore.sidebarRef, () =>
     navigationStore.setSidebarOpen(false)
   );
 

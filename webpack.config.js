@@ -8,6 +8,7 @@ module.exports = {
   output: {
     filename: "[name].[fullhash].js",
     path: path.resolve(__dirname, "dist"),
+    assetModuleFilename: "assets/[hash][ext]",
     publicPath: "/",
   },
   resolve: {
@@ -37,6 +38,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "public/index.html"),
+      favicon: path.resolve(__dirname, "public/favicon.ico"),
     }),
     new CleanWebpackPlugin(),
   ],
