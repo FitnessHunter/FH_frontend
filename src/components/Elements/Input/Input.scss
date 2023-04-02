@@ -1,0 +1,109 @@
+@use "/src/styles/variables";
+
+.input-container {
+  width: 100%;
+  position: relative;
+  margin: 5px 0 0 0;
+
+  &__show-hide {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+  }
+
+  &__input-error-message {
+    margin: 5px 16px 5px 16px;
+  }
+}
+
+.input {
+  width: 100%;
+  height: 45px;
+  padding: 0 15px 0 15px;
+  border-radius: 20px;
+  border: 1px solid variables.c(text, light);
+  font-size: 1.1rem; //18px;
+  color: variables.c(text, main);
+  outline: none;
+
+  &::placeholder {
+    visibility: hidden;
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid variables.c(text, dark);
+  }
+
+  &:disabled,
+  &:hover:disabled,
+  &:focus:disabled {
+    padding: 0 15px 0 15px;
+    color: variables.c(text, dark);
+    border: 1px solid variables.c(text, light);
+    background-color: variables.c(disabled, main);
+  }
+
+  &:focus ~ .input-label,
+  &:not(:placeholder-shown) ~ .input-label {
+    font-size: 0.9rem; //14px;
+    transform: translateX(8px) translateY(-22px);
+  }
+
+  &:disabled ~ .input-label,
+  &:disabled ~ .input-label-error {
+    color: variables.c(text, light);
+    background-color: variables.c(disabled, main);
+  }
+
+  &:disabled:not(:placeholder-shown) ~ .input-label,
+  &:disabled:not(:placeholder-shown) ~ .input-label-error {
+    background: linear-gradient(
+      0deg,
+      variables.c(disabled, main) 0%,
+      variables.c(disabled, main) 52%,
+      #ffffff00 52%,
+      #ffffff00 100%
+    );
+  }
+
+  &_error {
+    border: 1px solid variables.c(error, main);
+
+    &:hover,
+    &:focus {
+      padding: 0 14px 0 14px;
+      border: 2px solid variables.c(error, main);
+    }
+  }
+
+  &_password {
+    padding-right: 45px;
+
+    &:hover,
+    &:focus {
+      padding-right: 45px;
+    }
+  }
+}
+
+.input-label {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  padding: 0 3px 0 3px;
+  background-color: #ffffff;
+  font-size: 1rem; //16px;
+  color: variables.c(text, dark);
+  transition: transform 200ms, font-size 200ms;
+  pointer-events: none;
+
+  &_error {
+    color: variables.c(error, main);
+  }
+}
+
+.input-error-message {
+  font-size: 0.9rem; //14px;
+  color: variables.c(error, main);
+}

@@ -1,0 +1,43 @@
+$header-height: 66px;
+
+$palette: (
+  primary: (
+    main: #313b45,
+  ),
+  secondary: (
+    main: #b2ab8e,
+  ),
+  error: (
+    main: #d32f2f,
+    light: #ef5350,
+    dark: #c62828,
+  ),
+  success: (
+    main: #2e7d32,
+    light: #4caf50,
+    dark: #1b5e20,
+  ),
+  warning: (
+    main: #ed6c02,
+    light: #ff9800,
+    dark: #e65100,
+  ),
+  info: (
+    main: #0288d1,
+    light: #03a9f4,
+    dark: #01579b,
+  ),
+  text: (
+    main: #313b45,
+    light: #e9e9e9,
+    dark: #9ca1aa,
+    active: #181d22,
+  ),
+  disabled: (
+    main: #fafafa,
+  ),
+);
+
+@function c($group, $color) {
+  @return map-get(map-get($palette, $group), $color);
+}

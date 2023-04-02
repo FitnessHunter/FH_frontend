@@ -1,0 +1,86 @@
+@use "/src/styles/variables";
+
+.button {
+  width: max-content;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  user-select: none;
+  transition: all 100ms;
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &_s {
+    height: 28px;
+    padding: 6px 18px 0 18px;
+    border-radius: 12px;
+    font-size: 0.9rem; //14px;
+  }
+
+  &_m {
+    height: 36px;
+    padding: 6px 24px 0 24px;
+    border-radius: 16px;
+    font-size: 1.1rem; //18px;
+  }
+
+  &_l {
+    height: 50px;
+    padding: 9px 30px 0 30px;
+    border-radius: 20px;
+    font-size: 1.5rem; //24px;
+  }
+
+  &_outlined {
+    border: 1px solid variables.c(primary, main);
+    color: variables.c(primary, main);
+
+    &:hover,
+    &:focus {
+      border: 1px solid variables.c(secondary, main);
+      color: variables.c(secondary, main);
+    }
+
+    &_disabled {
+      border: 1px solid variables.c(text, light);
+      color: variables.c(text, light);
+      cursor: default;
+
+      &:hover,
+      &:focus {
+        border: 1px solid variables.c(text, light);
+        color: variables.c(text, light);
+      }
+
+      &:active {
+        transform: none;
+      }
+    }
+  }
+
+  &_contained {
+    background-color: variables.c(primary, main);
+    color: #ffffff;
+
+    &:hover,
+    &:focus {
+      background-color: variables.c(secondary, main);
+    }
+
+    &_disabled {
+      background-color: variables.c(text, light);
+      cursor: default;
+
+      &:hover,
+      &:focus {
+        background-color: variables.c(text, light);
+      }
+
+      &:active {
+        transform: none;
+      }
+    }
+  }
+}

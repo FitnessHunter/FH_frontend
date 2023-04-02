@@ -1,23 +1,23 @@
 {
   "name": "fh",
   "version": "1.0.0",
-  "description": "",
-  "main": "./src/index.tsx",
+  "main": "/src/index.tsx",
   "scripts": {
     "dev": "webpack serve --mode=development",
     "build": "webpack build --mode=production --progress"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "axios": "^1.2.2",
+    "classnames": "^2.3.2",
     "mobx": "^6.7.0",
     "mobx-react-lite": "^3.4.0",
     "mobx-state-tree": "^5.1.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.6.1"
+    "react-router-dom": "^6.6.1",
+    "react-transition-group": "^4.4.5",
+    "usehooks-ts": "^2.9.1",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.7",
@@ -27,11 +27,12 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/react-router-dom": "^5.3.3",
+    "@types/react-transition-group": "^4.4.5",
+    "@types/validator": "^13.7.11",
     "babel-loader": "^9.1.0",
     "clean-webpack-plugin": "^4.0.0",
     "core-js": "^3.27.1",
     "css-loader": "^6.7.3",
-    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "sass": "^1.57.1",
     "sass-loader": "^13.2.0",

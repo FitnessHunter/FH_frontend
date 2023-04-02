@@ -1,0 +1,37 @@
+@use "/src/styles/variables";
+
+.navigation-item {
+  width: max-content;
+  position: relative;
+  padding: 0 3px 0 3px;
+
+  &:after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    left: 0;
+    top: 110%;
+    background-color: variables.c(text, main);
+    transition: width 200ms ease-in-out;
+  }
+
+  &:hover:after {
+    width: 100%;
+  }
+
+  &:active {
+    color: variables.c(text, active);
+  }
+
+  &:active:after {
+    height: 3px;
+    background-color: variables.c(text, active);
+  }
+
+  &_current {
+    &:after {
+      content: none;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@use "/src/styles/variables";
+
+.auth-switch {
+  width: 100px;
+  height: 80px;
+  position: absolute;
+  top: -20px;
+  right: -15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: variables.c(primary, main);
+  cursor: pointer;
+
+  &_no-preview {
+    height: 100px;
+  }
+
+  &_with-preview {
+    width: 110px;
+    height: 110px;
+    top: -25px;
+    right: -20px;
+  }
+}
+
+.avatar-preview {
+  padding: 3px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.auth-switch-clear-preview {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  padding: 3px;
+  border-radius: 50%;
+  background-color: variables.c(text, light);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+}
