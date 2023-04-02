@@ -1,2 +1,7 @@
-node_modules
-dist
+# dependencies
+/node_modules
+
+# testing
+
+# production
+/dist

@@ -16,7 +16,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/i,
+        test: /\.(js|ts)x?$/i,
         use: "babel-loader",
         exclude: /node_modules/,
       },
@@ -36,7 +36,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, "index.html"),
+      template: path.resolve(__dirname, "public/index.html"),
     }),
     new CleanWebpackPlugin(),
   ],

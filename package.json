@@ -1,15 +1,11 @@
 {
   "name": "fh",
   "version": "1.0.0",
-  "description": "",
   "main": "/src/index.tsx",
   "scripts": {
     "dev": "webpack serve --mode=development",
     "build": "webpack build --mode=production --progress"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "axios": "^1.2.2",
     "classnames": "^2.3.2",
